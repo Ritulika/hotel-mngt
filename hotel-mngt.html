@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,200&family=Ubuntu:wght@300&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+</head>
+<style>
+    * {
+        box-sizing: border-box;
+        padding: 0;
+        margin: 0;
+        font-family: sans-serif;
+
+    }
+
+    body {
+        line-height: 1.6;
+
+    }
+
+    btn {
+        font-size: 16px;
+        text-transform: uppercase;
+        font-weight: 600;
+        border: none;
+        border-radius: 5px;
+        padding: 10px;
+        width: 140px;
+        display: block;
+        margin: 15px auto;
+        cursor: pointer;
+        transition: var(--transition);
+        position: absolute;
+    }
+
+    .btn:hover {
+        opacity: 0.85;
+
+    }
+
+    .flex {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    h3,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        margin-top: 90px;
+
+
+
+    }
+
+
+    img {
+        width: 100%;
+        display: block;
+    }
+
+    @media(max-width: 500px) {
+        body {
+            font-size: 14px;
+        }
+    }
+
+    .header {
+        background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.2)), url("2.jpg");
+        background-repeat: no-repeat;
+        min-height: 100vh;
+        padding: 25px;
+        display: flex;
+        flex-direction: column;
+        align-content: stretch;
+    }
+
+    .head-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .head-top span {
+        cursor: pointer;
+        letter-spacing: 2px;
+        transition: var(transition);
+
+    }
+
+    .head-top span hover {
+        color: yellow;
+
+    }
+
+    .head-bottom {
+        flex: 1;
+        text-align: center;
+        width: 80vw;
+        margin: 0 auto;
+
+    }
+
+    .head-bottom h2 {
+        padding: 22px 0;
+        font-size: 45px;
+        border-bottom: 1px solid #FFF;
+
+
+    }
+
+    .head-bottom p {
+        opacity: 0.7;
+        font-size: 20px;
+        margin: 30px auto;
+        width: 20vw;
+    }
+
+    .head-btn {
+        margin-left: 40%;
+        font-size: 20px;
+        font-weight: bold;
+        border: 3px solid #FFF;
+        background: transparent;
+        padding: 13px 20px;
+        background: rgba(0, 0, 0, 0.3);
+        color: white;
+        cursor: pointer;
+        position: center;
+
+    }
+
+    .head-btn:hover {
+        background: transparent;
+    }
+
+    @media(max-width:500px) {
+        .head-btn {
+            font-size: 17px;
+        }
+
+        .head-bottom h2 {
+            font-size: 28px;
+        }
+
+        .head-bottom p {
+            font-size: 17px;
+            margin: 20px auto;
+        }
+    }
+
+    .sidenav {
+        background: var(--dark);
+        color: white;
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        right: -100%;
+        width: 240px;
+        padding: 20px;
+
+    }
+
+    .sidenav.show {
+        right: 0;
+    }
+
+    .cancel-btn {
+        position: absolute;
+        right: 25px;
+        font-size: 22px;
+        cursor: pointer;
+        transition: var(--transition);
+    }
+
+    .cancel-btn:hover {
+        opacity: 0.7;
+    }
+
+    ul {
+        margin-top: 50px;
+        list-style: none;
+        padding: 12px;
+    }
+
+    ul li {
+        padding-top: 17px;
+    }
+
+    ul li a {
+        color: white;
+        text-transform: capitalize;
+        text-decoration: none;
+        padding: 15px auto;
+        display: block;
+        border-bottom: 0.5px solid rgba(249, 211, 56, 0.3);
+        opacity: 0.8;
+        letter-spacing: 1.5px;
+        transition: var(--transition);
+    }
+
+    ul li a:hover {
+        padding-left: 12px;
+    }
+
+    .sign-up,
+    .log-in {
+        background: var(--yellow);
+        color: white;
+    }
+
+    @media(max-width:400px) {
+        .sidenav {
+            width: 100vw;
+
+        }
+    }
+
+    .title {
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        font-size: 30px;
+        color: var(--yellow);
+        border-bottom: 5px solid var(--dark);
+        width: 180px;
+        margin: 15px 0;
+
+    }
+
+    .sec-width {
+        width: 85vw;
+        margin: 0 auto !important;
+    }
+
+    .services {
+        margin: 40px 0;
+    }
+
+    .service {
+        display: flex;
+        margin: 1px 0;
+    }
+
+    .service-icon {
+        flex: 20%;
+        align-self: flex-start;
+        font-size: 48px;
+        color: #252525;
+        margin-top: 80px;
+
+
+
+    }
+
+    .service-content {
+        padding-left: 20px;
+
+    }
+
+    .service-content h2 {
+        opacity: 0.7;
+    }
+
+    .service-content button {
+        margin-left: 0;
+        margin-right: 0;
+        background: var(--yellow);
+        color: white;
+    }
+
+    @media(min-width:992px) {
+        .services-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-column-gap: 30px;
+        }
+    }
+
+
+
+    .rooms {
+        margin: 40px 0;
+    }
+
+    .room {
+        margin: 45px 0;
+        padding-bottom: 25px;
+        background: var(--dark);
+        color: white;
+
+
+    }
+
+    .room-text {
+        padding: 5px 20px;
+    }
+
+    .room-text h3 {
+        font-size: 24px;
+        margin-top: 10px;
+    }
+
+    .room-text ul {
+        list-style-type: none;
+        margin: 15px 0;
+    }
+
+    .room-text ul li {
+        padding: 7px 0;
+
+    }
+
+    .room-text ul li i {
+        color: var(--yellow);
+        margin-right: 10px;
+    }
+
+    .rate {
+        opacity: 0.8;
+    }
+
+    .rate span {
+        font-size: 40px;
+        font-weight: 900;
+        color: var(--yellow);
+    }
+
+    .room-image {
+        overflow: hidden;
+    }
+
+    .room-image img {
+        transition: var(--transition);
+    }
+
+    .room-image:hover img {
+        transform: scale(1.1);
+    }
+
+    @media(min-width:900px) {
+        .rooms-container {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .room {
+            flex: 0 0 calc(50% -20px);
+            margin: 10px;
+        }
+    }
+
+    @media(min-width: 1370px) {
+        .rooms-container {
+            flex-direction: column;
+        }
+
+        .room {
+            display: flex;
+            padding-bottom: 0;
+            margin: 5px 0;
+        }
+
+        .rom-image {
+            flex: 1;
+        }
+
+        .room-image img {
+            height: 100%;
+        }
+
+        .room-text {
+            flex: 1;
+        }
+
+        .room:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+    }
+
+    .customers {
+        margin-top: 40px;
+        padding: 40px 0;
+        background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("1.png") center/cover no-repeat fixed;
+    }
+
+    .customer {
+        background: #FFF;
+        padding: 35px;
+        text-align: center;
+        margin: 24px 0;
+        box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.75);
+        cursor: pointer;
+        transition: var(--transition);
+    }
+
+    .rating {
+        margin: 10px 0;
+        color: var(--yellow);
+    }
+
+    .customer h3 {
+        font-size: 25px;
+    }
+
+    .customer p {
+        opacity: 0.7;
+        line-height: 1.8;
+        width: 60%;
+        margin: 0 auto;
+    }
+
+    .customer img {
+        width: 170px;
+        height: 170px;
+        border-radius: 50%;
+        margin: 25px auto;
+    }
+
+    .customer span {
+        font-weight: 700;
+        opacity: 0.7;
+    }
+
+    .customer:hover {
+        transform: translateY(-18px);
+    }
+
+    .footer {
+        background: var(--dark);
+        color: white;
+        text-align: center;
+    }
+
+    .footer-container {
+        width: 85vw;
+        margin: 0 auto;
+        padding: 30px 0;
+    }
+
+    .footer-container p,
+    .footer-container a,
+    .footer-container span {
+        opacity: 0.8;
+    }
+
+    .footer a {
+        display: block;
+        color: white;
+        text-decoration: none;
+    }
+
+    .contact-item span {
+        display: block;
+    }
+
+    @media(min-width : 900px) {
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-gap: 20px;
+        }
+    }
+
+    @media(min-width:1170px) {
+        .footer {
+            text-align: left;
+        }
+
+        .footer-container {
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+        .footer-container div:nth-child(1) p {
+            padding-right: 20px;
+        }
+
+        .contact-item {
+            display: grid;
+            grid-template-columns: 10% 90%;
+            margin-bottom: 15px;
+            align-items: center;
+        }
+    }
+
+    .showModal {
+        position: fixed;
+        background: transparent;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        z-index: 5;
+
+    }
+</style>
+
+
+<body>
+    <header class="header" id="header">
+        <div class="head-top">
+            <div class="site-name">
+                <span>GEEKPROKBIN</span>
+            </div>
+            <div class="site-nav">
+                <span id="nav-btn">Menu<i class="fas fa-bars"></i></span>
+
+            </div>
+        </div>
+        <div class="haed-bottom-flex">
+            <h2>NICE AND COMFORTABLE PLACE TO SIT</h2>
+            <p>Radisson Chandigarh Zirakpur is an upscale and full-service hotel, strategically located just minutes
+                away from Chandigarh International Airport and the Chandigarh-Patiala highway. Our 104 contemporary
+                rooms and suites are equipped with a host of modern conveniences; while the meeting and banquet halls
+                can be tailored to suit celebrations and events of all kinds and sizes.</p>
+            <button type="button" class="head-btn">GET STARTED</button>
+        </div>
+    </header>
+
+    <div class="sidenav" id="sidenav">
+        <span class="cancel-btn" id="cancel-btn">
+            <i class="fas fa-times"></i>
+        </span>
+        <ul>
+            <li><a href="#">home</a></li>
+            <li><a href="#">service</a></li>
+            <li><a href="#">room</a></li>
+            <li><a href="#">customer</a></li>
+        </ul>
+        <button type="button" class="btn sign-up">SIGN-UP</button>
+        <button type="button" class="btn log-in">LOG-IN</button>
+    </div>
+    <div id="modal"></div>
+    <section class="services sec-width" id="services">
+        <div class="title">
+            <h2>services</h2>
+        </div>
+        <div class="services-container">
+            <article class="service">
+                <div class="service-icon">
+                    <span>
+                        
+                    </span>
+                </div>
+                <div class="service-content">
+                    <h2>food service</h2>
+                    <p>Coffee house on site<br>
+                        Chocolate/Cookies <br>
+                        Additional charge<br>
+                        Bottle of water<br>
+                        Wine/Champagne <br>
+                        Additional charge<br>
+                        Kids' meals 
+                        Additional charge
+                        Special diet meals (on request)
+                        Snack bar
+                        Breakfast in th</p>
+                    <button type="button" class="btn">KNOW MORE</button>
+                </div>
+            </article>
+            <article class="service">
+                <div class="service-icon">
+                    <span>
+                       
+
+
+                    </span>
+                </div>
+                <div class="service-content">
+                    <h2>wifi</h2>
+                    <p> WiFi is available in all areas and is free of charge.</p>
+                    <button type="button" class="btn">KNOW MORE</button>
+                </div>
+            </article>
+            <article class="service">
+                <div class="service-icon">
+                    <span>
+                        
+                    </span>
+                </div>
+                <div class="service-content">
+                    <h2>parking</h2>
+                    <p>Free private parking is available on site (reservation is not needed).<br>
+                        Parking garage<br>
+                        Secure parking<br>
+                        Airport drop-off(Additional charge)<br>
+                        Airport pickup(Additional charge)<br>
+                        </p>
+                    <button type="button" class="btn">KNOW MORE</button>
+                </div>
+            </article>
+            <article class="service">
+                <div class="service-icon">
+                    <span>
+                        
+                    </span>
+                </div>
+                <div class="service-content">
+                    <h2>HOUSEKEEPING</h2>
+                    <p>Daily housekeeping<br>
+                        Suit press <br>
+                        Shoeshine <br>
+                        Ironing service <br>
+                        Dry cleaning <br>
+                        Laundry <br>
+                    </p>
+                    <button type="button" class="btn">KNOW MORE</button>
+                </div>
+
+            </article>
+        </div>
+    </section>
+
+
+
+
+    <section class="rooms sec-width" id="rooms">
+        <div class="title">
+            <h2>rooms</h2>
+        </div>
+        <div class="rooms-container">
+            <article class="room">
+                <div class="room-image">
+                    <img src="img14.jpeg" alt="img14" width="100px" height="500px">
+                </div>
+                <div class="room-text">
+                    <h3>Luxuary rooms</h3>
+                    <ul>
+                        <li>
+                            <i class="fas fa-arrow-alt-circle-right"></i>
+                            Featuring fireplaces and LCD televisions
+                        </li>
+                        <li>
+                            <i class="fas fa-arrow-alt-circle-right"></i>
+                            Digital programming and DVD players
+                        </li>
+                        <li>
+                            <i class="fas fa-arrow-alt-circle-right"></i>
+                             Wireless Internet access keeps you connected
+                        </li>
+                        <p>Pamper yourself with a visit to the spa, which offers body treatments and facials.</p>
+                        <p>Addtional features at this Art Deco hotel include complimentary wireless Internet access, concierge services</p>
+                        <p class="rate">
+                            <span>$99.00</span>per night
+                        </p>
+                        <button type="button" class="btn">book now</button>
+                    </ul>
+                </div>
+
+
+
+            </article>
+
+            <article class="room">
+                <div class="room-image">
+                    <img src="img15.jpg" alt="img15" width="100px" height="500px">
+                </div>
+                <div class="room-text">
+                    <h3>Luxuary rooms</h3>
+                    <ul>
+                        <li>
+                            <i class="fas fa-arrow-alt-circle-right"></i>
+                            Featuring fireplaces and LCD televisions
+                        </li>
+                        <li>
+                            <i class="fas fa-arrow-alt-circle-right"></i>
+                            Digital programming and DVD players
+                        </li>
+                        <li>
+                            <i class="fas fa-arrow-alt-circle-right"></i>
+                            Wireless Internet access keeps you connected
+                        </li>
+                        <p>Pamper yourself with a visit to the spa, which offers body treatments and facials.</p>
+                        <p>Addtional features at this Art Deco hotel include complimentary wireless Internet access, concierge services</p>
+                        <p class="rate">
+                            <span>$99.00</span>per night
+                        </p>
+                        <button type="button" class="btn">book now</button>
+                    </ul>
+                </div>
+
+
+
+            </article>
+
+            <article class="room">
+                <div class="room-image">
+                    <img src="img16.jpg" alt="img16" width="100px" height="500px">
+                </div>
+                <div class="room-text">
+                    <h3>Luxuary rooms</h3>
+                    <ul>
+                        <li>
+                            <i class="fas fa-arrow-alt-circle-right"></i>
+                            Featuring fireplaces and LCD televisions
+                        </li>
+                        <li>
+                            <i class="fas fa-arrow-alt-circle-right"></i>
+                            Digital programming and DVD players
+                        </li>
+                        <li>
+                            <i class="fas fa-arrow-alt-circle-right"></i>
+                            Wireless Internet access keeps you connected
+                        </li>
+                        <p>Pamper yourself with a visit to the spa, which offers body treatments and facials.</p>
+                        <p>Addtional features at this Art Deco hotel include complimentary wireless Internet access, concierge services</p>
+                        <p class="rate">
+                            <span>$99.00</span>per night
+                        </p>
+                        <button type="button" class="btn">book now</button>
+                    </ul>
+                </div>
+
+
+
+            </article>
+        </div>
+    </section>
+    <section class="customers" id="customers">
+        <div class="sec-width">
+            <div class="title">
+                <h2>Customers</h2>
+            </div>
+            <div class="customers-container">
+                <div class="customer">
+                    <div class="rating">
+                        <span><i class="fas fa-star"></i></span>
+                        <span><i class="fas fa-star"></i></span>
+                        <span><i class="fas fa-star"></i></span>
+                        <span><i class="fas fa-star"></i></span>
+                        <span><i class="far fa-star"></i></span>
+
+
+                    </div>
+                    <h3>We loved it</h3>
+                    <p>Awesome stay with maximum comfort. Rooms are premium class within working affordable ranges. Good breakfast menu too for all the days I stayed over</p>
+                    <img src="img8.jpg" alt="img8" width="85vw">
+                    <span>customer Name,country</span>
+                </div>
+            </div>
+
+
+            <div class="customer">
+                <div class="rating">
+                    <span><i class="fas fa-star"></i></span>
+                    <span><i class="fas fa-star"></i></span>
+                    <span><i class="fas fa-star"></i></span>
+                    <span><i class="fas fa-star"></i></span>
+                    <span><i class="far fa-star"></i></span>
+
+
+                </div>
+                <h3>comfortable living</h3>
+                <p>Really nice ambience. Fine rooms with all the standard amenities in a 5 Star hotel but hair dryer was missing and wasn't available in any room</p>
+                <img src="img5.jpg" alt="img5">
+                <span>customer Name,country</span>
+            </div>
+
+            <div class="customer">
+                <div class="rating">
+                    <span><i class="fas fa-star"></i></span>
+                    <span><i class="fas fa-star"></i></span>
+                    <span><i class="fas fa-star"></i></span>
+                    <span><i class="fas fa-star"></i></span>
+                    <span><i class="far fa-star"></i></span>
+
+
+                </div>
+                <h3>Nice place</h3>
+                <p>Really nice ambience. Fine rooms with all the standard amenities in a 5 Star hotel but hair dryer was missing and wasn't available in any room</p>
+                <img src="img6.jpg" alt="img6">
+                <span>customer Name,country</span>
+            </div>
+
+        </div>
+    </section>
+    <footer class="footer">
+        <div class="footer-container">
+            <div>
+                <h2>About us</h2>
+                <p>This upscale hotel lies 11 km from Indira Gandhi International Airport and 23 km from Qutb Minar tower monument.
+
+
+                    Sleek rooms offer flat-screen TVs, free Wi-Fi and minibars. They all also have work desks with data ports and tea and coffeemakers, while suites add separate living areas.</p>
+
+
+            </div>
+
+            <div>
+                <h2>useful links</h2>
+                <a href="#">Blog</a>
+                <a href="#">Rooms</a>
+                <a href="#">Contact us</a>
+                <a href="#">Gift card</a>
+            </div>
+
+            <div>
+                <h2>Privacy</h2>
+                <a href="#">Career</a>
+                <a href="#">About us</a>
+                <a href="#">Contact us</a>
+                <a href="#">services</a>
+            </div>
+
+            <div>
+                <h2>Have a Question?</h2>
+                <div class="contact-items">
+                    <span>
+                        <i class="fas fa-map-marker-alt"></i>
+                    </span>
+                    <span>
+                        203 Fake st.Mountain View , san Francisco,
+                        California , USA
+                    </span>
+                </div>
+                <div class="contact-item">
+                    <span>
+                        <i class="fas fa-phone-square"></i>
+                    </span>
+                    <span>
+                        +9898987656
+                    </span>
+                </div>
+                <div class="contact-item">
+                    <span>
+                        <i class="fas fa-envelope"></i> 
+                    </span>
+                    <span>
+                        info@gmail.com
+                    </span>
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+    </footer>
+    <script>
+        const navBtn = document.getElementById('nav-btn');
+
+        const cancelBtn = document.getElementById('cancel-btn');
+        const sideNav = document.getElementById('sidenav');
+        const modal = document.getElementById('modal');
+
+        navBtn.addEventListener("click", function(){
+            sideNav.classList.add('show');
+            modal.classList.add('showModal');
+
+        });
+
+       
+
+
+        //cancelBtn.addEventListener('click', function(){
+            
+            //sideNav.classList.remove('show');
+            //modal.classList.remove('showModal');
+            
+        //});
+
+        window.addEventListener('click', function(event) {
+           if (event.target === modal) {
+               sideNav.classList.remove('show');
+                modal.classList.remove('showModal');
+            }
+        });
+
+       
+
+
+    </script>
+
+
+</body>
+
+</html>
